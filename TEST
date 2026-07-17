@@ -1,0 +1,64 @@
+git clone --branch 19.0 --single-branch https://github.com/odoo/odoo.git
+
+
+MKDIR PROJECTS
+
+CD PROEHCTS 
+ git clone git@github.com:wasmar404/odoo_setup.git
+
+root@c2r7s5:/goinfre/odoo/projects/odoo_setup# mv estate estate_accounts /goinfre/odoo/projects/
+root@c2r7s5:/goinfre/odoo/projects/odoo_setup# ls
+root@c2r7s5:/goinfre/odoo/projects/odoo_setup# cd ..
+root@c2r7s5:/goinfre/odoo/projects# rm -rf odoo_setup/
+root@c2r7s5:/goinfre/odoo/projects# ls
+estate  estate_accounts
+
+
+
+sudo apt install postgresql postgresql-client
+sudo -u postgres createuser -d -R -S event
+createdb event
+sudo -u postgres createdb -O event event
+
+
+root@c2r7s5:/goinfre/odoo# sudo python3 odoo-bin --addons-path=/goinfre/odoo/odoo/Odoo_Enterprise/addons,/goinfre/odoo/projects -d admin -i estate,estate_accounts
+
+
+
+
+
+
+
+root@c2r7s5:/goinfre/odoo# sudo python3 odoo-bin --addons-path=/goinfre/odoo/odoo/Odoo_Enterprise/addons,/goinfre/odoo/projects -d admin -i estate,estate_accounts
+Traceback (most recent call last):
+  File "/goinfre/odoo/odoo-bin", line 3, in <module>
+    import odoo.cli
+  File "/goinfre/odoo/odoo/cli/__init__.py", line 2, in <module>
+    from .command import Command, main  # noqa: F401
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/goinfre/odoo/odoo/cli/command.py", line 8, in <module>
+    import odoo.init  # import first for core setup
+    ^^^^^^^^^^^^^^^^
+  File "/goinfre/odoo/odoo/init.py", line 26, in <module>
+    _monkeypatches.patch_init()
+  File "/goinfre/odoo/odoo/_monkeypatches/__init__.py", line 65, in patch_init
+    patch_module('_cpython')
+  File "/goinfre/odoo/odoo/_monkeypatches/__init__.py", line 69, in patch_module
+    module = importlib.import_module(f'.{name}', __name__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/pyenv/versions/3.11.15/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/goinfre/odoo/odoo/_monkeypatches/_cpython.py", line 4, in <module>
+    from odoo.tools.safe_eval import _UNSAFE_ATTRIBUTES
+  File "/goinfre/odoo/odoo/tools/__init__.py", line 8, in <module>
+    from .config import config
+  File "/goinfre/odoo/odoo/tools/config.py", line 19, in <module>
+    from passlib.context import CryptContext
+ModuleNotFoundError: No module named 'passlib'
+root@c2r7s5:/goinfre/odoo# 
+pip3 install passlib
+
+
+
+python3 -m pip install -r requirements.txt
